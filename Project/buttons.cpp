@@ -6,6 +6,7 @@
 void initButtonsAndButtonInterrupts(void)
 {
   // See requirements for this function from buttons.h
+  // kommentti
 }
 
 ISR(PCINT2_vect) {
