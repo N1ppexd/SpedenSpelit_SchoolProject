@@ -1,6 +1,6 @@
 #include "display.h"
 
-//niilon muutos testi committi
+
 void initializeDisplay(void)
 {
 // See requirements for this function from display.h
