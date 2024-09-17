@@ -1,8 +1,6 @@
 #include "buttons.h"
 
 
-//pelle
-//okfoskfs
 
 void initButtonsAndButtonInterrupts(void)
 {
