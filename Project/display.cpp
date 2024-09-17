@@ -22,11 +22,12 @@ void initializeDisplay(void)
 
 void writeByte(uint8_t bits,bool last)
 {
-    if(!last){ return; }
+    
 
     //bits cant be over 9 or under 0 for 7 segment display...
     if(bits > 9 || bits < 0){ return; }
 
+    
     digitalWrite(latchPin, LOW);
 
     for(int i = 0; i < 8; i++){
@@ -42,7 +43,9 @@ void writeByte(uint8_t bits,bool last)
     }
 
     digitalWrite(clockPin, LOW);
-    digitalWrite(latchPin, HIGH);
+    //if last is true, we should print the number, otherwise this is done only when w're done
+    //idk what the fuck am i saying
+    if(last) { digitalWrite(latchPin, HIGH); }
 }
 
 
