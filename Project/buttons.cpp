@@ -2,6 +2,7 @@
 
 
 //pelle
+//okfoskfs
 
 void initButtonsAndButtonInterrupts(void)
 {
