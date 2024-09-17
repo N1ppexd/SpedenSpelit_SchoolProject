@@ -11,23 +11,37 @@ volatile bool newTimerInterrupt = false;  // for timer interrupt handler
 
 void setup()
 {
+initButtonsAndButtonInterrupts();
+initializeDisplay();
+initializeLeds();
   /*
     Initialize here all modules
   */
 }
 
 void loop()
-{
-  if(buttonNumber>=0)
-  {
-     // start the game if buttonNumber == 4
+{ 
+  // start the game if buttonNumber == 4
+  if (buttonNumber == 4){
+    startTheGame();
+  } 
      // check the game if 0<=buttonNumber<4
+  if (buttonNumber >= 0 & buttonNumber < 4) {
+
   }
+     
+
+
 
   if(newTimerInterrupt == true)
   {
      // new random number must be generated
-     // and corresponding let must be activated
+     int randomNumber = random(0,4);
+     // and corresponding led must be activated
+
+     // digitalWrite(ledipinni[randomNumber], HIGH);
+    
+     // newTimerInterrupt = false:
   }
 }
 
@@ -58,6 +72,6 @@ void initializeGame()
 
 void startTheGame()
 {
-   // see requirements for the function from SpedenSpelit.h
+  initializeGame(); // initialize game settings
 }
 
