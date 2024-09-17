@@ -52,6 +52,8 @@ void writeByte(uint8_t bits,bool last)
 void writeHighAndLowNumber(uint8_t tens,uint8_t ones)
 {
 // See requirements for this function from display.h
+    writeByte(tens, false);
+    writeByte(ones, true);
 }
 
 void showResult(byte number)
