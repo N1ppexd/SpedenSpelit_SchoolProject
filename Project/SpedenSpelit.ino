@@ -61,6 +61,16 @@ ISR(TIMER1_COMPA_vect)
 
 void checkGame(byte nbrOfButtonPush)
 {
+/* checks if the right button was pressed.
+
+if (lastButtonPress = correctButtonPress) {
+correctButtonPress = random(0, 4);
+} else {
+
+  code for losing.
+}
+*/
+
 	// see requirements for the function from SpedenSpelit.h
 }
 
@@ -73,5 +83,6 @@ void initializeGame()
 void startTheGame()
 {
   initializeGame(); // initialize game settings
+  initializeTimer();
 }
 
