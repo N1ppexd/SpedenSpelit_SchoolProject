@@ -24,6 +24,9 @@ void writeByte(uint8_t bits,bool last)
 {
     if(!last){ return; }
 
+    //bits cant be over 9 or under 0 for 7 segment display...
+    if(bits > 9 || bits < 0){ return; }
+
     digitalWrite(latchPin, LOW);
 
     for(int i = 0; i < 8; i++){
@@ -50,5 +53,15 @@ void writeHighAndLowNumber(uint8_t tens,uint8_t ones)
 
 void showResult(byte number)
 {
-// See requirements for this function from display.h
+    //number has to be between these...
+    if(number > 99 || number < 0) { return; }
+
+    if(number < 10){
+        writeHighAndLowNumber(0, number);
+        return;
+    }
+    int tens = (number - (number % 10)) / 10;
+    int ones = number - tens;
+
+    writeHighAndLowNumber(tens, ones);
 }
