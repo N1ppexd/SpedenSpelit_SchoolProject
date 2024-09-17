@@ -31,7 +31,7 @@ void writeByte(uint8_t bits,bool last)
 
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
-        digitalWrite((shiftedBits >> i) & 1);
+        digitalWrite(dataPin, (shiftedBits >> i) & 1);
 
         digitalWrite(clockPin, HIGH);
     }
