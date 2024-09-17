@@ -35,6 +35,7 @@ void writeByte(uint8_t bits,bool last)
         digitalWrite(dataPin, (shiftedBits >> i) & 1);
 
         digitalWrite(clockPin, HIGH);
+        digitalWrite(dataPin, LOW); //prevent this from being 1 next time so no bugs
     }
 
     digitalWrite(clockPin, LOW);
