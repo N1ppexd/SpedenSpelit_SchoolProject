@@ -61,7 +61,7 @@ void showResult(byte number)
         return;
     }
     int tens = (number - (number % 10)) / 10;
-    int ones = number - tens;
+    int ones = number - (tens * 10);
 
     writeHighAndLowNumber(tens, ones);
 }
