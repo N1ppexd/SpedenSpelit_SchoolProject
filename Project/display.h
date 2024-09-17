@@ -3,6 +3,12 @@
 #include <arduino.h>
 
 
+const int resetPin = 12;      //SRCLR
+const int clockPin = 11;      //SRCLK //SHCP
+const int latchPin = 10;      //RCLK  //STCP
+const int outEnablePin = 9;   //OE
+const int dataPin = 8;        //SER / dsp
+
 /*
   initializeDisplay subroutine initializes 5 pins needed for controlling 7-segment
   displays in a cascade as follows:
