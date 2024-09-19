@@ -6,10 +6,10 @@ const int ledPins[] = {A2, A3, A4, A5};
 // Initialize analog pins A2,A3,A4,A5 to be used as outputs
 void initializeLeds()
 {
-  pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
-  pinMode(A5, OUTPUT);
+  for (int i = 0; i < 4; i++)
+  {
+      pinMode(ledPins[i], OUTPUT);
+  }
 }
 
 /*
@@ -21,10 +21,15 @@ void initializeLeds()
 */
 void setLed(byte ledNumber)
 {
-  setLed(0);
-  setLed(1);
-  setLed(2);
-  setLed(3);
+  if (ledNumber >= 0 && ledNumber <= 3)
+  {
+    for (int i = 0; i < 4; i++)
+    {
+      digitalWrite(ledPins[i], LOW);  // Clear all the LEDs first to ensure that only one LED can be turned on at a time
+    }
+
+  digitalWrite(ledPins[ledNumber], HIGH);  // Turn on the specified LED 
+  }
 }
 
 // Clears all leds
@@ -32,15 +37,19 @@ void clearAllLeds()
 {
   for (int i = 0; i < 4; i++) 
   {
-    digitalWrite(ledPins[i], LOW);
+    digitalWrite(ledPins[i], LOW);  // Turn off the specified leds (led 0, 1, 2 and 3)
   }
 }
 
+// Sets all leds
 void setAllLeds()
 {
-// see requirements for this function from leds.h
+  for (int i = 0; i < 4; i++) 
+  {
+    digitalWrite(ledPins[i], HIGH);  // Turn on the specified leds (led 0, 1, 2 and 3)
+  }
+    
 }
-
 
 void show1()
 {
