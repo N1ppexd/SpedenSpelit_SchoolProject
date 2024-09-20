@@ -43,8 +43,8 @@ void testiOhjelma(void);
 void show1(void);
 
 /*
-  show2(int) subroutine shows leds 0,1,2,3,0,1,2,3,.... with increasing
-  changing rate. And when top change speed has been reached
+  show2(int) subroutine shows leds 0, 0,1, 0,1,2, 0,1,2,3 with increasing
+  changing rate per round. And when top change speed has been reached
 
     Parameters:
   
