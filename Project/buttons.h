@@ -8,6 +8,10 @@
 const byte firstPin = 2; // First PinChangeInterrupt on D-bus
 const byte lastPin =  5; // Last PinChangeInterrupt on D-bus
 
+//const float pressTreshold että jos nappia on painanu tarpeeksi kauan, peli alkaa
+
+//float buttonPressedTime varmaan tänne myös enb tiiä
+
 /* 
   initButtonsAndButtonInterrupts subroutine is called from Setup() function
   during the initialization of Speden Spelit. This function does the following:
