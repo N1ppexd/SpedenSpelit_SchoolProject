@@ -47,8 +47,27 @@ void setAllLeds()
   for (int i = 0; i < 4; i++) 
   {
     digitalWrite(ledPins[i], HIGH);  // Turn on the specified leds (led 0, 1, 2 and 3)
-  }
-    
+  }  
+}
+
+// void setLed(byte), void clearAllLeds(void) ja void setAllLeds(void) aliohjelmien toiminnan testausta varten
+void testiOhjelma()
+{
+  void setLed(byte ledNumber);
+  setAllLeds();
+  delay(1000);
+  clearAllLeds();
+  delay(1000);
+  setLed(0);
+  delay(1000);
+  setLed(1);
+  delay(1000);
+  setLed(2);
+  delay(1000);
+  setLed(3);
+  delay(1000);
+  clearAllLeds();
+  delay(1000);
 }
 
 void show1()
