@@ -32,6 +32,11 @@ void clearAllLeds(void);
 void setAllLeds(void);
 
 /*
+  Testiohjelma, jolla void setLed(byte), void clearAllLeds(void) ja void setAllLeds(void) aliohjelmien toiminta tulee todistettua 
+*/
+void testiOhjelma(void); 
+
+/*
   show1() subroutine shows numbers 0,1,...,15 as binary numbers
   waits a bit and repeats number "show"
 */
