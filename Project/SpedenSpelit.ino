@@ -8,7 +8,6 @@
 volatile int buttonNumber = -1;           // for buttons interrupt handler
 volatile bool newTimerInterrupt = false;  // for timer interrupt handler
 
-
 void setup()
 {
 initButtonsAndButtonInterrupts();
@@ -27,7 +26,7 @@ void loop()
   } 
      // check the game if 0<=buttonNumber<4
   if (buttonNumber >= 0 & buttonNumber < 4) {
-
+    checkGame(buttonNumber);
   }
      
 
@@ -36,12 +35,11 @@ void loop()
   if(newTimerInterrupt == true)
   {
      // new random number must be generated
-     int randomNumber = random(0,4);
+    int randomNumber = random(0,4);
      // and corresponding led must be activated
+    digitalWrite(ledipinni[randomNumber], HIGH);
 
-     // digitalWrite(ledipinni[randomNumber], HIGH);
-    
-     // newTimerInterrupt = false:
+    newTimerInterrupt = false:
   }
 }
 
@@ -61,15 +59,21 @@ ISR(TIMER1_COMPA_vect)
 
 void checkGame(byte nbrOfButtonPush)
 {
-/* checks if the right button was pressed.
 
-if (lastButtonPress = correctButtonPress) {
-correctButtonPress = random(0, 4);
-} else {
+// checks if the right button was pressed.
+if (nbrOfButtonPush == 0){
 
-  code for losing.
 }
-*/
+if (nbrOfButtonPush == 1){
+  
+}
+if (nbrOfButtonPush == 2){
+  
+}
+if (nbrOfButtonPush == 3){
+  
+}
+
 
 	// see requirements for the function from SpedenSpelit.h
 }
