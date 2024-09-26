@@ -6,6 +6,8 @@ const int latchPin = 10;      //RCLK  //STCP
 const int outEnablePin = 9;   //OE
 const int dataPin = 8;        //SER / dsp
 
+
+
 void initializeDisplay(void)
 {
     pinMode(resetPin, OUTPUT);
@@ -24,7 +26,8 @@ void writeByte(uint8_t bits,bool last)
     
 
     //bits cant be over 9 or under 0 for 7 segment display...
-    if(bits > 9 || bits < 0){ return; }
+    if(bits > 9 ) { bits = 9; }
+    if(bits < 0) { bits = 0; }
 
     
     digitalWrite(latchPin, LOW);
@@ -48,24 +51,65 @@ void writeByte(uint8_t bits,bool last)
 }
 
 
-void writeHighAndLowNumber(uint8_t tens,uint8_t ones)
+void writeHighAndLowNumber(int numbers[])
 {
 // See requirements for this function from display.h
-    writeByte(tens, false);
+    
     writeByte(ones, true);
+
+    for(int i = amountOfDisplays - 1; i >= 0; i--){
+
+        bool isLast = false;
+        if(i == 0){
+            isLast = true;
+        }
+        writeByte(numbers[i], isLast);
+    }
 }
 
 void showResult(byte number)
 {
     //number has to be between these...
-    if(number > 99 || number < 0) { return; }
+    int maxAmount = positivePowerOfTen(amountOfDisplays);
+
+    if(number >= maxAmount){
+        number = maxAmount -1;
+    }
+    if(number < 0){
+        number = 0;
+    }
+
+    
+    int numbers[amountOfDisplays];
+    /*
 
     if(number < 10){
         writeHighAndLowNumber(0, number);
         return;
     }
     int tens = (number - (number % 10)) / 10;
-    int ones = number - (tens * 10);
+    int ones = number - (tens * 10);*/
 
-    writeHighAndLowNumber(tens, ones);
+    for(int i = 0; i < amountOfDisplays; i++){
+        int thing = positivePowerOfTen(amountOfDisplays - 1 - i);
+        int currentNumber = number / thing;
+        number -= currentNumber;
+        numbers[i] = currentNumber;
+        //numbers[i] = number - (number % thing) / thing;
+    }
+
+    writeHighAndLowNumber(numbers);
+}
+
+
+int positivePowerOfTen(int n){
+    int result = 1;
+
+    if (n > 0) {
+        for (i = 0; i < n; i++) {
+            result *= 10;
+        }
+    }
+
+    return result;
 }

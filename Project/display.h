@@ -3,7 +3,7 @@
 #include <arduino.h>
 
 
-
+const int amountOfDisplays = 2;
 
 /*
   initializeDisplay subroutine initializes 5 pins needed for controlling 7-segment
@@ -47,7 +47,7 @@ void writeByte(uint8_t number, bool last);
   uint8_t ones: number 0,1,..,9
   
 */
-void writeHighAndLowNumber(uint8_t tens,uint8_t ones);
+void writeHighAndLowNumber(int numbers[]);
 
 
 /*
@@ -59,5 +59,7 @@ void writeHighAndLowNumber(uint8_t tens,uint8_t ones);
   byte result: A number between 0,1,..,99. This function
 */
 void showResult(byte result);
+
+int positivePowerOfTen(int n);
 
 #endif
