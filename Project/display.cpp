@@ -55,7 +55,7 @@ void writeHighAndLowNumber(int numbers[])
 {
 // See requirements for this function from display.h
     
-    writeByte(ones, true);
+    //writeByte(ones, true);
 
     for(int i = amountOfDisplays - 1; i >= 0; i--){
 
@@ -95,7 +95,6 @@ void showResult(byte number)
         int currentNumber = number / thing;
         number -= currentNumber;
         numbers[i] = currentNumber;
-        //numbers[i] = number - (number % thing) / thing;
     }
 
     writeHighAndLowNumber(numbers);
