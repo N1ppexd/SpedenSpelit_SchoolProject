@@ -18,6 +18,8 @@ const int amountOfDisplays = 2;
 */
 void initializeDisplay(void);
 
+void clearDisplay(void);
+
 /*
   WriteByte subroutine writes number 0,1,...,9 to
   7-segment display. If there are many 7-segment
