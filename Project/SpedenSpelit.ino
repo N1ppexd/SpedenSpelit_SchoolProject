@@ -8,7 +8,12 @@
 volatile int buttonNumber = -1;           // for buttons interrupt handler
 volatile bool newTimerInterrupt = false;  // for timer interrupt handler
 volatile int interruptCount = 0;
-
+byte gameNumbers[10];
+byte playerButtonPushes[10];
+int scoreNumber = 0;
+int currentRound = 0;
+bool rightNumber = false;
+int ledNumber = 0;
 
 void setup()
 {
@@ -37,9 +42,11 @@ void loop()
   if(newTimerInterrupt == true)
   {
      // new random number must be generated
-    int randomNumber = random(0,4);
+    int randomNumber = gameNumbers[currenRound];
      // and corresponding led must be activated
-    digitalWrite(ledipinni[randomNumber], HIGH);
+    digitalWrite(ledNumber[randomNumber], HIGH);
+    
+    currentRound++
 
     newTimerInterrupt = false:
   }
@@ -77,22 +84,18 @@ if (interruptCount >= 10) {
 }
 
 
-void checkGame(byte nbrOfButtonPush)
+void checkGame(byte buttonNumber)
 {
+  // checks if the right button was pressed.
+  if (buttonNumber == gameNumbers[currentround]) {
+    playerButtonPushes[currentRound] = buttonNumber;
+    currentRound++;
+    scoreNumber++;
+    rightNumber = true;
+  } else {
+    rightNumber = false;
+  }
 
-// checks if the right button was pressed.
-if (nbrOfButtonPush == 0){
-
-}
-if (nbrOfButtonPush == 1){
-  
-}
-if (nbrOfButtonPush == 2){
-  
-}
-if (nbrOfButtonPush == 3){
-  
-}
 
 
 	// see requirements for the function from SpedenSpelit.h
@@ -101,11 +104,20 @@ if (nbrOfButtonPush == 3){
 
 void initializeGame()
 {
+for (int i = 0; i < 10; i++) {
+  gameNumbers[i] = random(0,4);
+}
+
+for (int i = 0; i < 10; i++) {
+  playerButtonPushes[i] = 0;
+}
+
 	// see requirements for the function from SpedenSpelit.h
 }
 
 void startTheGame()
 {
+  currentRound = 0;
   initializeGame(); // initialize game settings
   initializeTimer();
 }
