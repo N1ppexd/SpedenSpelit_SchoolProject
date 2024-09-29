@@ -18,6 +18,7 @@ int ledNumber = 0;
 void setup()
 {
 initButtonsAndButtonInterrupts();
+initTimer1(); 
 initializeDisplay();
 initializeLeds();
   /*
