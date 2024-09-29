@@ -4,6 +4,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+//button äänen note
+#define NOTE_C5  523
 
 const byte firstPin = 2; // First PinChangeInterrupt on D-bus
 const byte lastPin =  5; // Last PinChangeInterrupt on D-bus
