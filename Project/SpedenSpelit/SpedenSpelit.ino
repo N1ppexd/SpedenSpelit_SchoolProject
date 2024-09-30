@@ -42,13 +42,13 @@ void loop()
   if(newTimerInterrupt == true)
   {
      // new random number must be generated
-    int randomNumber = gameNumbers[currenRound];
+    int randomNumber = gameNumbers[currentRound];
      // and corresponding led must be activated
     digitalWrite(ledNumber[randomNumber], HIGH);
     
     currentRound++
 
-    newTimerInterrupt = false:
+    newTimerInterrupt = false;
   }
 }
 
@@ -87,7 +87,7 @@ if (interruptCount >= 10) {
 void checkGame(byte buttonNumber)
 {
   // checks if the right button was pressed.
-  if (buttonNumber == gameNumbers[currentround]) {
+  if (buttonNumber == gameNumbers[currentRound]) {
     playerButtonPushes[currentRound] = buttonNumber;
     currentRound++;
     scoreNumber++;
