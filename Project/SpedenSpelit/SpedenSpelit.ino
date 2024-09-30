@@ -5,7 +5,6 @@
 
 // Use these 2 volatile variables for communicating between
 // loop() function and interrupt handlers
-volatile int buttonNumber = -1;           // for buttons interrupt handler
 volatile bool newTimerInterrupt = false;  // for timer interrupt handler
 volatile int interruptCount = 0;
 byte gameNumbers[10];
@@ -15,11 +14,14 @@ int currentRound = 0;
 bool rightNumber = false;
 int ledNumber = 0;
 
+bool isPlaying;
+
 void setup()
 {
 initButtonsAndButtonInterrupts();
 initializeDisplay();
 initializeLeds();
+Serial.begin(9600);
   /*
     Initialize here all modules
   */
@@ -28,13 +30,20 @@ initializeLeds();
 void loop()
 { 
   // start the game if buttonNumber == 4
-  if (buttonNumber == 4){
+  if (hasPressedLongEnough(3, 1)){
     startTheGame();
+    isPlaying = true;
   } 
      // check the game if 0<=buttonNumber<4
-  if (buttonNumber >= 0 && buttonNumber < 4) {
+  /*if (buttonNumber >= 0 && buttonNumber < 4) {
+
     checkGame(buttonNumber);
+  }*/
+
+  if(isPlaying){
+    checkGame(getPressedButton());
   }
+  
      
 
 
@@ -44,9 +53,9 @@ void loop()
      // new random number must be generated
     int randomNumber = gameNumbers[currentRound];
      // and corresponding led must be activated
-    digitalWrite(ledNumber[randomNumber], HIGH);
+    digitalWrite(ledPins[randomNumber], HIGH);
     
-    currentRound++
+    //currentRound++;
 
     newTimerInterrupt = false;
   }
@@ -84,19 +93,28 @@ if (interruptCount >= 10) {
 }
 
 
-void checkGame(byte buttonNumber)
+bool checkGame(int buttonNum)
 {
   // checks if the right button was pressed.
-  if (buttonNumber == gameNumbers[currentRound]) {
-    playerButtonPushes[currentRound] = buttonNumber;
+  if (buttonNum == gameNumbers[currentRound]) {
+    playerButtonPushes[currentRound] = gameNumbers[currentRound];
     currentRound++;
     scoreNumber++;
+
+    
     rightNumber = true;
-  } else {
+  } else if (buttonNum >= 0) {
+    setAllLeds();
     rightNumber = false;
   }
 
+  setLed(gameNumbers[currentRound]);
+  showResult(currentRound);
+  Serial.println("");
+  Serial.print("currentRound = ");
+  Serial.println(currentRound);
 
+  return rightNumber;
 
 	// see requirements for the function from SpedenSpelit.h
 }
@@ -120,5 +138,7 @@ void startTheGame()
   currentRound = 0;
   initializeGame(); // initialize game settings
   initializeTimer();
+
+  Serial.println("vittu toimi pls");
 }
 

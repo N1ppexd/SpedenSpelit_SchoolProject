@@ -7,6 +7,8 @@ const int outEnablePin = 9;   //OE
 const int dataPin = 8;        //SER / dsp
 
 
+//const byte bitNumbers[10] = {B01111110,B00110000, B01101101, B01111001, B00110011, B01011011, B01110000, B01111111, B01111011};
+
 
 void initializeDisplay(void)
 {
@@ -14,7 +16,7 @@ void initializeDisplay(void)
     pinMode(clockPin, OUTPUT);
     pinMode(latchPin, OUTPUT);
     pinMode(outEnablePin, OUTPUT);
-    pinMode(dataPin, OUPUT);
+    pinMode(dataPin, OUTPUT);
 
     digitalWrite(outEnablePin, LOW);
     digitalWrite(resetPin, HIGH);
@@ -23,12 +25,11 @@ void initializeDisplay(void)
 
 void writeByte(uint8_t bits,bool last)
 {
-    
-
     //bits cant be over 9 or under 0 for 7 segment display...
     if(bits > 9 ) { bits = 9; }
     if(bits < 0) { bits = 0; }
 
+    //bits = bitNumbers[bits];
     
     digitalWrite(latchPin, LOW);
 
@@ -79,7 +80,7 @@ void showResult(byte number)
         number = 0;
     }
 
-    
+    // Serial.println((int)number);
     int numbers[amountOfDisplays];
     /*
 
@@ -105,7 +106,7 @@ int positivePowerOfTen(int n){
     int result = 1;
 
     if (n > 0) {
-        for (i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             result *= 10;
         }
     }

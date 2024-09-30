@@ -33,7 +33,7 @@ void initializeGame(void);
   byte lastButtonPress of the player 0 or 1 or 2 or 3
   
 */
-void checkGame(byte);
+bool checkGame(int buttonNum);
 
 
 /*

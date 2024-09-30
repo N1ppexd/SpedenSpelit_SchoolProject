@@ -1,7 +1,6 @@
 #include "leds.h"
 
-// Define pin numbers for the LEDs
-const int ledPins[] = {A2, A3, A4, A5};
+
 
 // Initialize analog pins A2,A3,A4,A5 to be used as outputs
 void initializeLeds()

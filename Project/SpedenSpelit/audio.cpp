@@ -12,7 +12,7 @@ void playStartAudio(void){
     
 }
 
-playAudio(int frequency, int timeInMilliseconds){
+void playAudio(int frequency, int timeInMilliseconds){
     tone(buzzerPin, frequency);
     delay(timeInMilliseconds);
     noTone(buzzerPin);
