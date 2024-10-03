@@ -39,7 +39,7 @@ void writeByte(uint8_t bits,bool last)
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
         //(shiftedBits >> i) & 1 is always either 0 or 1
-        digitalWrite(dataPin, ((shiftedBits << i) & B10000000) >> 8);///
+        digitalWrite(dataPin, ((shiftedBits << i) & B10000000) >> 7);///
 
         digitalWrite(clockPin, HIGH);
         digitalWrite(dataPin, LOW); //prevent this from being 1 next time so no bugs
