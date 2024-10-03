@@ -29,7 +29,7 @@ void writeByte(uint8_t bits,bool last)
     if(bits > 9 ) { bits = 9; }
     if(bits < 0) { bits = 0; }
 
-    //bits = bitNumbers[bits];
+    bits = bitNumbers[bits];
     
     digitalWrite(latchPin, LOW);
 
