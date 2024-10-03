@@ -7,7 +7,7 @@ const int outEnablePin = 9;   //OE
 const int dataPin = 8;        //SER / dsp
 
 
-const byte bitNumbers[10] = {B01111110,B00110000, B01101101, B01111001, B00110011, B01011011, B01110000, B01111111, B01111011};
+const byte bitNumbers[10] = {0b01111110,0b00110000, 0b01101101, 0b01111001, 0b00110011, 0b01011011, 0b01110000, 0b01111111, 0b01111011};
 
 
 void initializeDisplay(void)
@@ -38,7 +38,7 @@ void writeByte(uint8_t bits,bool last)
 
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
-        digitalWrite(dataPin, ((shiftedBits << i) & B10000000) >> 7);///
+        digitalWrite(dataPin, ((shiftedBits << i) & 0b10000000) >> 7);///
 
         digitalWrite(clockPin, HIGH);
         digitalWrite(dataPin, LOW); 
