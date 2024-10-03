@@ -147,7 +147,5 @@ void startTheGame()
   currentRound = 0;
   initializeGame(); // initialize game settings
   initializeTimer();
-
-  Serial.println("vittu toimi pls");
 }
 
