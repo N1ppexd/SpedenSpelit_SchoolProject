@@ -38,24 +38,19 @@ void writeByte(uint8_t bits,bool last)
 
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
-        //(shiftedBits >> i) & 1 is always either 0 or 1
         digitalWrite(dataPin, ((shiftedBits << i) & B10000000) >> 7);///
 
         digitalWrite(clockPin, HIGH);
-        digitalWrite(dataPin, LOW); //prevent this from being 1 next time so no bugs
+        digitalWrite(dataPin, LOW); 
     }
 
     digitalWrite(clockPin, LOW);
-    //if last is true, we should print the number, otherwise this is done only when w're done
-    //idk what the fuck am i saying
     if(last) { digitalWrite(latchPin, HIGH); }
 }
 
 
 void writeHighAndLowNumber(int numbers[])
 {
-// See requirements for this function from display.h
-    
     //writeByte(ones, true);
 
     for(int i = amountOfDisplays - 1; i >= 0; i--){
@@ -79,17 +74,8 @@ void showResult(byte number)
     if(number < 0){
         number = 0;
     }
-
-    // Serial.println((int)number);
+    
     int numbers[amountOfDisplays];
-    /*
-
-    if(number < 10){
-        writeHighAndLowNumber(0, number);
-        return;
-    }
-    int tens = (number - (number % 10)) / 10;
-    int ones = number - (tens * 10);*/
 
     for(int i = 0; i < amountOfDisplays; i++){
         int thing = positivePowerOfTen(amountOfDisplays - 1 - i);
