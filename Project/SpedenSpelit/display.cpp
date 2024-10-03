@@ -7,7 +7,19 @@ const int outEnablePin = 9;   //OE
 const int dataPin = 8;        //SER / dsp
 
 
-const byte bitNumbers[10] = {0b01111110,0b00110000, 0b01101101, 0b01111001, 0b00110011, 0b01011011, 0b01110000, 0b01111111, 0b01111011};
+const byte bitNumbers[10] = 
+{
+    0b00111111,
+    0b00110000, 
+    0b01101101, 
+    0b01111001, 
+    0b00110011, 
+    0b01011011,
+    0b01011111, 
+    0b01110000, 
+    0b01111111, 
+    0b01111011
+};
 
 
 void initializeDisplay(void)
