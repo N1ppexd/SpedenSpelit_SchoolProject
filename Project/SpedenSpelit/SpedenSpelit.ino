@@ -13,8 +13,9 @@ int scoreNumber = 0;
 int currentRound = 0;
 bool rightNumber = false;
 int ledNumber = 0;
-
+bool gameContinues;
 bool isPlaying;
+bool gameLost;
 
 void setup()
 {
@@ -43,9 +44,16 @@ void loop()
   if(isPlaying){
     checkGame(getPressedButton());
   }
-  
-     
 
+if(gameLost){
+
+  isPlaying = false;
+}
+
+// Asks initializeGame for new round
+if(gameContinues){
+  initializeGame();
+}
 
 
   if(newTimerInterrupt == true)
@@ -106,6 +114,7 @@ bool checkGame(int buttonNum)
   } else if (buttonNum >= 0) {
     setAllLeds();
     rightNumber = false;
+    gameLost = true;
   }
 
   setLed(gameNumbers[currentRound]);
