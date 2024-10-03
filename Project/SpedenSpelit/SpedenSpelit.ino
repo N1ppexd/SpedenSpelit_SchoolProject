@@ -3,9 +3,7 @@
 #include "leds.h"
 #include "SpedenSpelit.h"
 
-// Use these 2 volatile variables for communicating between
-// loop() function and interrupt handlers
-volatile bool newTimerInterrupt = false;  // for timer interrupt handler
+volatile bool newTimerInterrupt = false;  
 volatile int interruptCount = 0;
 byte gameNumbers[10];
 byte playerButtonPushes[10];
@@ -23,14 +21,12 @@ initButtonsAndButtonInterrupts();
 initializeDisplay();
 initializeLeds();
 Serial.begin(9600);
-  /*
-    Initialize here all modules
-  */
+
 }
 
 void loop()
 { 
-  // start the game if buttonNumber == 4
+
   if (hasPressedLongEnough(3, 1)){
     startTheGame();
     isPlaying = true;
@@ -50,7 +46,7 @@ if(gameLost){
   isPlaying = false;
 }
 
-// Asks initializeGame for new round
+// Asks initializeGame for new 10 rounds.
 if(gameContinues){
   initializeGame();
 }
