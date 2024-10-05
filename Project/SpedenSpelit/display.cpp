@@ -22,6 +22,10 @@ const byte bitNumbers[10] =
 };
 
 
+const byte displayPointByte = 1;
+const byte clearDisplayByte = 0;
+
+
 void initializeDisplay(void)
 {
     pinMode(resetPin, OUTPUT);
@@ -35,14 +39,22 @@ void initializeDisplay(void)
 }
 
 
+void clearDisplay(void){
+    for(int i = amountOfDisplays - 1; i >= 0; i--){
+
+        bool isLast = false;
+        if(i == 0){
+            isLast = true;
+        }
+
+        writeByte(clearDisplayByte, isLast);
+    }
+}
+
+
 void writeByte(uint8_t bits,bool last)
 {
-    //bits cant be over 9 or under 0 for 7 segment display...
-    if(bits > 9 ) { bits = 9; }
-    if(bits < 0) { bits = 0; }
 
-    bits = bitNumbers[bits];
-    
     digitalWrite(latchPin, LOW);
 
     for(int i = 0; i < 8; i++){
@@ -72,7 +84,13 @@ void writeHighAndLowNumber(int numbers[])
         if(i == 0){
             isLast = true;
         }
-        writeByte(numbers[i], isLast);
+
+        if(numbers[i] > 9 ) { numbers[i] = 9; }
+        if(numbers[i] < 0) { numbers[i] = 0; }
+
+        byte bits = bitNumbers[numbers[i]];
+
+        writeByte(bits, isLast);
     }
 }
 
