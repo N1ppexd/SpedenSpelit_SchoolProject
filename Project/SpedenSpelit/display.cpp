@@ -9,16 +9,16 @@ const int dataPin = 8;        //SER / dsp
 
 const byte bitNumbers[10] = 
 {
-    0b00111111,
-    0b00110000, 
-    0b01101101, 
-    0b01111001, 
-    0b00110011, 
-    0b01011011,
-    0b01011111, 
-    0b01110000, 
-    0b01111111, 
-    0b01111011
+    0b11111100, //0b00111111,  //0b11111100,
+    0b01100000, //0b00110000   //0b00001100
+    0b11011010, //0b01101101, //0b10110110
+    0b11110010, //0b01111001  //0b10011110
+    0b01100110, //0b01110010  //0b01001110
+    0b10110110, //0b01011011, //0b11011010
+    0b10111110, //0b01011111  //0b11111010
+    0b10001100, //0b00110001  //0b10001100
+    0b11111110, //0b01111111  //0b11111110,
+    0b11110110  //0b01111011  //0b11011110
 };
 
 
@@ -50,7 +50,8 @@ void writeByte(uint8_t bits,bool last)
 
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
-        digitalWrite(dataPin, ((shiftedBits << i) & 0b10000000) >> 7);///
+        //digitalWrite(dataPin, ((shiftedBits << i) & 0b10000000) >> 7);///
+        digitalWrite(dataPin, (shiftedBits >> i) & 1);
 
         digitalWrite(clockPin, HIGH);
         digitalWrite(dataPin, LOW); 
@@ -92,7 +93,7 @@ void showResult(byte number)
     for(int i = 0; i < amountOfDisplays; i++){
         int thing = positivePowerOfTen(amountOfDisplays - 1 - i);
         int currentNumber = number / thing;
-        number -= currentNumber;
+        number -= currentNumber * thing;
         numbers[i] = currentNumber;
     }
 
