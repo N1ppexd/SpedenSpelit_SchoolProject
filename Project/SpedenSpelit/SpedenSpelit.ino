@@ -49,10 +49,13 @@ void loop()
     }
   }
 
-  if(gameLost){
-    setAllLeds();
-    isPlaying = false;
-  }
+  if(gameLost && isPlaying){
+
+  isPlaying = false;
+  setAllLeds();
+  delay(1000);
+  show2(12);
+}
 
 }
 void initializeTimer(void)
@@ -145,6 +148,9 @@ void initializeGame()
 
 void startTheGame()
 {
+  setAllLeds();
+  delay(1000);
+  show1();
   maxTime = maxMaxTime;
   currentRound = 0;
   roundRound = 0;
