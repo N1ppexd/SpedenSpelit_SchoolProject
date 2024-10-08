@@ -13,13 +13,18 @@ bool gameContinues;
 bool isPlaying;
 bool gameLost;
 
+
+unsigned long maxTime = 30;
+volatile long currentTime;
+volatile bool timeHasPassed;
+
+
 void setup()
 {
-initButtonsAndButtonInterrupts();
-initializeDisplay();
-initializeLeds();
-Serial.begin(9600);
-
+  initButtonsAndButtonInterrupts();
+  initializeDisplay();
+  initializeLeds();
+  Serial.begin(9600);
 }
 
 void loop()
@@ -29,24 +34,17 @@ void loop()
     startTheGame();
     isPlaying = true;
     gameLost = false;
-  } 
-     // check the game if 0<=buttonNumber<4
-  /*if (buttonNumber >= 0 && buttonNumber < 4) {
-
-    checkGame(buttonNumber);
-  }*/
-
-  if(isPlaying){
-    checkGame(getPressedButton());
   }
 
-if(gameLost){
-  setAllLeds();
-  isPlaying = false;
-}
+  if(isPlaying){
+    int buttonPressed = getPressedButton();
+    checkGame(buttonPressed);
+  }
 
-
-
+  if(gameLost){
+    setAllLeds();
+    isPlaying = false;
+  }
 
   if(newTimerInterrupt == true)
   {
@@ -76,12 +74,10 @@ void initializeTimer(void)
 
 ISR(TIMER1_COMPA_vect)
 {
-
-  /*
-  Communicate to loop() that it's time to make new random number.
-  Increase timer interrupt rate after 10 interrupts.
-  */
-  
+  if(currentTime >= maxTime && isPlaying){
+    currentTime++;
+    timeHasPassed = true;
+  }
 }
 
 
@@ -93,15 +89,24 @@ bool checkGame(int buttonNum)
     playerButtonPushes[currentRound] = gameNumbers[currentRound];
     currentRound++;
     interruptCount++;
-    if (interruptCount >= 10) {
+
+    //check if button has been pressed 10 times
+    if (interruptCount >= 9) {
       interruptCount = 0;
       initializeGame();
     }
     
     rightNumber = true;
+    currentTime = 0;
+
   } else if (buttonNum >= 0) {
     rightNumber = false;
     gameLost = true;
+  }
+
+  //if no button is being pressed
+  if(buttonNum == -1 && timeHasPassed){
+    //check if time has passed
   }
 
   setLed(gameNumbers[currentRound]);
@@ -132,6 +137,7 @@ for (int i = 0; i < 10; i++) {
 void startTheGame()
 {
   currentRound = 0;
+  timeHasPassed = false;
   initializeGame(); // initialize game settings
   initializeTimer();
 }
