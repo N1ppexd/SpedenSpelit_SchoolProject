@@ -24,6 +24,7 @@ void setup()
   initButtonsAndButtonInterrupts();
   initializeDisplay();
   initializeLeds();
+  initializeTimer();
   Serial.begin(9600);
 }
 
@@ -38,7 +39,11 @@ void loop()
 
   if(isPlaying){
     int buttonPressed = getPressedButton();
-    checkGame(buttonPressed);
+  if (checkGame(buttonPressed)){
+        int randomNumber = gameNumbers[currentRound];
+     // and corresponding led must be activated
+    setLed(randomNumber);
+    }
   }
 
   if(gameLost){
@@ -46,18 +51,6 @@ void loop()
     isPlaying = false;
   }
 
-  if(newTimerInterrupt == true)
-  {
-     // new random number must be generated
-    int randomNumber = gameNumbers[currentRound];
-     // and corresponding led must be activated
-    digitalWrite(ledPins[randomNumber], HIGH);
-    
-    //currentRound++;
-
-    newTimerInterrupt = false;
-  }
-}
 
 void initializeTimer(void)
 {
@@ -74,9 +67,13 @@ void initializeTimer(void)
 
 ISR(TIMER1_COMPA_vect)
 {
-  if(currentTime >= maxTime && isPlaying){
-    currentTime++;
+  if(isPlaying){
+  currentTime++;
+    
+    if (currentTime >= maxTime){
     timeHasPassed = true;
+    currentTime = 0;
+    }
   }
 }
 
@@ -94,6 +91,7 @@ bool checkGame(int buttonNum)
     if (interruptCount >= 9) {
       interruptCount = 0;
       initializeGame();
+      maxTime = maxTime * 0.9;
     }
     
     rightNumber = true;
@@ -139,6 +137,8 @@ void startTheGame()
   currentRound = 0;
   timeHasPassed = false;
   initializeGame(); // initialize game settings
-  initializeTimer();
+  int randomNumber = gameNumbers[currentRound];
+  setLed(randomNumber);
+  currentTime = 0;
 }
 
