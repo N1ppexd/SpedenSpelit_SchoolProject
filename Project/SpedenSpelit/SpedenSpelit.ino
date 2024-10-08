@@ -107,7 +107,7 @@ bool checkGame(int buttonNum)
     //check if time has passed
   }
 
-  setLed(gameNumbers[currentRound]);
+  //setLed(gameNumbers[currentRound]);
   showResult(currentRound);
   Serial.println("");
   Serial.print("currentRound = ");
