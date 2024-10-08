@@ -14,8 +14,8 @@ bool gameContinues;
 bool isPlaying;
 bool gameLost;
 
-
-unsigned long maxTime = 30;
+const unsigned maxMaxTime = 30;
+unsigned long maxTime;
 volatile long currentTime;
 volatile bool timeHasPassed;
 
@@ -144,6 +144,7 @@ for (int i = 0; i < 10; i++) {
 
 void startTheGame()
 {
+  maxTime = maxMaxTime;
   currentRound = 0;
   roundRound = 0;
   timeHasPassed = false;
