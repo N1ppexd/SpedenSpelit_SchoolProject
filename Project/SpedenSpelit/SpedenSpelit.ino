@@ -7,9 +7,7 @@ volatile bool newTimerInterrupt = false;
 volatile int interruptCount = 0;
 byte gameNumbers[10];
 byte playerButtonPushes[10];
-int scoreNumber = 0;
 int currentRound = 0;
-bool rightNumber = false;
 int ledNumber = 0;
 bool gameContinues;
 bool isPlaying;
@@ -30,6 +28,7 @@ void loop()
   if (hasPressedLongEnough(3, 1)){
     startTheGame();
     isPlaying = true;
+    gameLost = false;
   } 
      // check the game if 0<=buttonNumber<4
   /*if (buttonNumber >= 0 && buttonNumber < 4) {
@@ -42,14 +41,11 @@ void loop()
   }
 
 if(gameLost){
-
+  setAllLeds();
   isPlaying = false;
 }
 
-// Asks initializeGame for new 10 rounds.
-if(gameContinues){
-  initializeGame();
-}
+
 
 
   if(newTimerInterrupt == true)
@@ -80,15 +76,7 @@ void initializeTimer(void)
 
 ISR(TIMER1_COMPA_vect)
 {
-newTimerInterrupt = true;
-interruptCount++;
 
-if (interruptCount >= 10) {
-  cli(); // clear interrupts = disable interrupts
-  OCR1A = OCR1A * 0.9; // Decreasing OCR1A by 10%
-  interruptCount = 0; // reset the interrupt count
-  sei(); // Re-enable interrupts
-  }
   /*
   Communicate to loop() that it's time to make new random number.
   Increase timer interrupt rate after 10 interrupts.
@@ -99,16 +87,19 @@ if (interruptCount >= 10) {
 
 bool checkGame(int buttonNum)
 {
+  bool rightNumber = false;
   // checks if the right button was pressed.
   if (buttonNum == gameNumbers[currentRound]) {
     playerButtonPushes[currentRound] = gameNumbers[currentRound];
     currentRound++;
-    scoreNumber++;
-
+    interruptCount++;
+    if (interruptCount >= 10) {
+      interruptCount = 0;
+      initializeGame();
+    }
     
     rightNumber = true;
   } else if (buttonNum >= 0) {
-    setAllLeds();
     rightNumber = false;
     gameLost = true;
   }
