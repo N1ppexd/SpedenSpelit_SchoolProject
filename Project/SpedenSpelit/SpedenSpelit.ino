@@ -51,7 +51,7 @@ void loop()
     isPlaying = false;
   }
 
-
+}
 void initializeTimer(void)
 {
   int timerLimit = 6250;
