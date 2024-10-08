@@ -1,6 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 #include <arduino.h>
+#define NOTE_C5  523
 
 const byte buzzerPin = A0;
 

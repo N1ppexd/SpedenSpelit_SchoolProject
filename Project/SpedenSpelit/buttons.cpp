@@ -107,6 +107,7 @@ bool hasPressedLongEnough(int button, float time){
 
   if(result){
     buttonPressedFlag[button] = false;
+    timePressed = millis();
   }
  
   //Serial.println(result);

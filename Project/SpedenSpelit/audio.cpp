@@ -3,7 +3,7 @@
 
 
 void playButtonPressAudio(void){
-
+    playAudio(NOTE_C5, 100); 
 }
 void playLoseAudio(void){
 
