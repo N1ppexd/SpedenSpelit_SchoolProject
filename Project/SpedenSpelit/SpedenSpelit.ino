@@ -40,12 +40,12 @@ void loop()
 
   if(isPlaying){
     int buttonPressed = getPressedButton();
-  if (checkGame(buttonPressed)){
-        int randomNumber = gameNumbers[roundRound];
-     // and corresponding led must be activated
-     clearAllLeds();
-     delay(100);
-    setLed(randomNumber);
+    if (checkGame(buttonPressed)){
+      int randomNumber = gameNumbers[roundRound];
+      // and corresponding led must be activated
+      clearAllLeds();
+      delay(100);
+      setLed(randomNumber);
     }
   }
 
@@ -70,12 +70,12 @@ void initializeTimer(void)
 
 ISR(TIMER1_COMPA_vect)
 {
-  if(isPlaying){
-  currentTime++;
-    
+  if(isPlaying)
+  {
+    currentTime++;
     if (currentTime >= maxTime){
-    timeHasPassed = true;
-    currentTime = 0;
+      timeHasPassed = true;
+      currentTime = 0;
     }
   }
 }
@@ -84,15 +84,18 @@ ISR(TIMER1_COMPA_vect)
 bool checkGame(int buttonNum)
 {
   bool rightNumber = false;
+
   // checks if the right button was pressed.
-  if (buttonNum == gameNumbers[roundRound]) {
+  if (buttonNum == gameNumbers[roundRound])
+  {
     playerButtonPushes[roundRound] = gameNumbers[roundRound];
     currentRound++;
     roundRound++;
     interruptCount++;
 
     //check if button has been pressed 10 times
-    if (interruptCount >= 9) {
+    if (interruptCount >= 9) 
+    {
       interruptCount = 0;
       initializeGame();
       maxTime = maxTime * 0.9;
@@ -105,39 +108,37 @@ bool checkGame(int buttonNum)
     rightNumber = true;
     currentTime = 0;
 
-  } else if (buttonNum >= 0) {
+  } 
+  else if (buttonNum >= 0) 
+  {
     rightNumber = false;
     gameLost = true;
   }
 
-  //if no button is being pressed
-  if(buttonNum == -1 && timeHasPassed){
-    //check if time has passed
+  if(buttonNum == -1 && timeHasPassed)
+  {
     gameLost = true;
   }
 
-  //setLed(gameNumbers[currentRound]);
   showResult(currentRound);
   Serial.println("");
   Serial.print("currentRound = ");
   Serial.println(currentRound);
 
   return rightNumber;
-
-	// see requirements for the function from SpedenSpelit.h
 }
 
 
 void initializeGame()
 {
   roundRound = 0;
-for (int i = 0; i < 10; i++) {
-  gameNumbers[i] = random(0,4);
-}
+  for (int i = 0; i < 10; i++) {
+    gameNumbers[i] = random(0,4);
+  }
 
-for (int i = 0; i < 10; i++) {
-  playerButtonPushes[i] = 0;
-}
+  for (int i = 0; i < 10; i++) {
+    playerButtonPushes[i] = 0;
+  }
 
 	// see requirements for the function from SpedenSpelit.h
 }
