@@ -14,7 +14,7 @@ bool gameContinues;
 bool isPlaying;
 bool gameLost;
 
-const unsigned maxMaxTime = 30;
+const unsigned long maxMaxTime = 30;
 unsigned long maxTime;
 volatile long currentTime;
 volatile bool timeHasPassed;
