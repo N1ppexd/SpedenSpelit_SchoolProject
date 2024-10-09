@@ -7,8 +7,7 @@ volatile bool newTimerInterrupt = false;
 volatile int interruptCount = 0;
 byte gameNumbers[10];
 byte playerButtonPushes[10];
-int currentRound = 0; //this CAN BE MORE THAN 9
-int roundRound = 0; //10 round rounds in one round and 10 normal rounds in one round too. Becomes 0 when it becomes 9
+int currentRound = 0;
 int ledNumber = 0;
 bool gameContinues;
 bool isPlaying;
@@ -32,29 +31,23 @@ void setup()
 void loop()
 { 
 
-  if (hasPressedLongEnough(3, 1)){
+  if (hasPressedLongEnough(3, 1) && !isPlaying)
+  {
     startTheGame();
     isPlaying = true;
     gameLost = false;
   }
 
-  if(isPlaying){
+  if(isPlaying)
+  {
     int buttonPressed = getPressedButton();
-    if (checkGame(buttonPressed)){
-      int randomNumber = gameNumbers[roundRound];
-      // and corresponding led must be activated
-      clearAllLeds();
-      delay(100);
-      setLed(randomNumber);
-    }
+    checkGame(buttonPressed);
   }
 
-  if(gameLost && isPlaying){
-
-  isPlaying = false;
-  setAllLeds();
-  delay(1000);
-  show2(12);
+  if(gameLost && isPlaying)
+  {
+    loseTheGame();
+  }
 }
 
 }
@@ -84,22 +77,20 @@ ISR(TIMER1_COMPA_vect)
 }
 
 
-bool checkGame(int buttonNum)
+void checkGame(int buttonNum)
 {
-  bool rightNumber = false;
-
   // checks if the right button was pressed.
-  if (buttonNum == gameNumbers[roundRound])
+  if (buttonNum == gameNumbers[interruptCount])
   {
-    playerButtonPushes[roundRound] = gameNumbers[roundRound];
+    playerButtonPushes[interruptCount] = gameNumbers[interruptCount];
     currentRound++;
-    roundRound++;
     interruptCount++;
+
+    int randomNumber = gameNumbers[interruptCount];
 
     //check if button has been pressed 10 times
     if (interruptCount >= 9) 
     {
-      interruptCount = 0;
       initializeGame();
       maxTime = maxTime * 0.9;
     }
@@ -108,16 +99,19 @@ bool checkGame(int buttonNum)
     Serial.print("maxTime = ");
     Serial.println(maxTime);
     
-    rightNumber = true;
     currentTime = 0;
 
+    clearAllLeds();
+    delay(100);
+    setLed(randomNumber);
+
   } 
+  //if player DID press a button (meaning buttonNum is more or equal to 0), but it was the wrong one, game is lost
   else if (buttonNum >= 0) 
   {
-    rightNumber = false;
     gameLost = true;
   }
-
+  //if button was not pressed, and time has passed, player loses...
   if(buttonNum == -1 && timeHasPassed)
   {
     gameLost = true;
@@ -128,13 +122,13 @@ bool checkGame(int buttonNum)
   Serial.print("currentRound = ");
   Serial.println(currentRound);
 
-  return rightNumber;
+  //return rightNumber;
 }
 
 
 void initializeGame()
 {
-  roundRound = 0;
+  interruptCount = 0;
   for (int i = 0; i < 10; i++) {
     gameNumbers[i] = random(0,4);
   }
@@ -142,9 +136,8 @@ void initializeGame()
   for (int i = 0; i < 10; i++) {
     playerButtonPushes[i] = 0;
   }
-
-	// see requirements for the function from SpedenSpelit.h
 }
+
 
 void startTheGame()
 {
@@ -153,11 +146,20 @@ void startTheGame()
   show1();
   maxTime = maxMaxTime;
   currentRound = 0;
-  roundRound = 0;
+  interruptCount = 0;
   timeHasPassed = false;
   initializeGame(); // initialize game settings
-  int randomNumber = gameNumbers[currentRound];
+  int randomNumber = gameNumbers[interruptCount];
   setLed(randomNumber);
   currentTime = 0;
+}
+
+
+void loseTheGame()
+{
+  isPlaying = false;
+  setAllLeds();
+  delay(1000);
+  show2(12);
 }
 
