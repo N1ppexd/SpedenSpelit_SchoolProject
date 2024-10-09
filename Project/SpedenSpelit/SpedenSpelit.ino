@@ -50,7 +50,6 @@ void loop()
   }
 }
 
-}
 void initializeTimer(void)
 {
   int timerLimit = 6250;
