@@ -3,13 +3,12 @@
 #include "leds.h"
 #include "SpedenSpelit.h"
 
-volatile bool newTimerInterrupt = false;  
-volatile int interruptCount = 0;
+
+int pressedCount = 0;
 byte gameNumbers[10];
 byte playerButtonPushes[10];
 int currentRound = 0;
 int ledNumber = 0;
-bool gameContinues;
 bool isPlaying;
 bool gameLost;
 
@@ -79,16 +78,16 @@ ISR(TIMER1_COMPA_vect)
 void checkGame(int buttonNum)
 {
   // checks if the right button was pressed.
-  if (buttonNum == gameNumbers[interruptCount])
+  if (buttonNum == gameNumbers[pressedCount])
   {
-    playerButtonPushes[interruptCount] = gameNumbers[interruptCount];
+    playerButtonPushes[pressedCount] = gameNumbers[pressedCount];
     currentRound++;
-    interruptCount++;
+    pressedCount++;
 
-    int randomNumber = gameNumbers[interruptCount];
+    int randomNumber = gameNumbers[pressedCount];
 
     //check if button has been pressed 10 times
-    if (interruptCount >= 9) 
+    if (pressedCount >= 9) 
     {
       initializeGame();
       maxTime = maxTime * 0.9;
@@ -127,7 +126,7 @@ void checkGame(int buttonNum)
 
 void initializeGame()
 {
-  interruptCount = 0;
+  pressedCount = 0;
   for (int i = 0; i < 10; i++) {
     gameNumbers[i] = random(0,4);
   }
@@ -145,10 +144,10 @@ void startTheGame()
   show1();
   maxTime = maxMaxTime;
   currentRound = 0;
-  interruptCount = 0;
+  pressedCount = 0;
   timeHasPassed = false;
   initializeGame(); // initialize game settings
-  int randomNumber = gameNumbers[interruptCount];
+  int randomNumber = gameNumbers[pressedCount];
   setLed(randomNumber);
   currentTime = 0;
 }
