@@ -71,22 +71,22 @@ void testiOhjelma()
 // show1() subroutine shows numbers 0,1,...,15 as binary numbers, waits a bit and repeats number "show"
 void show1()
 {
-  clearAllLeds(), delay(1000); 
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A2, HIGH), digitalWrite(A3, LOW), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
+  clearAllLeds(), delay(200); 
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A2, HIGH), digitalWrite(A3, LOW), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
 }
 
 /* 

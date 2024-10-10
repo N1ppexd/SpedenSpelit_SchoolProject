@@ -2,6 +2,7 @@
 #include "buttons.h"
 #include "leds.h"
 #include "SpedenSpelit.h"
+#include "audio.h"
 
 
 int pressedCount = 0;
@@ -12,10 +13,12 @@ int ledNumber = 0;
 bool isPlaying;
 bool gameLost;
 
-const unsigned long maxMaxTime = 30;
+const unsigned long maxMaxTime = 25;
 unsigned long maxTime;
 volatile long currentTime;
 volatile bool timeHasPassed;
+
+int highScore = 0;
 
 
 void setup()
@@ -24,17 +27,35 @@ void setup()
   initializeDisplay();
   initializeLeds();
   initializeTimer();
+  clearDisplay();
   Serial.begin(9600);
 }
 
 void loop()
 { 
 
-  if (hasPressedLongEnough(3, 1) && !isPlaying)
+  
+
+  if (!isPlaying)
   {
-    startTheGame();
-    isPlaying = true;
-    gameLost = false;
+    if (hasPressedLongEnough(3, 1))
+    {
+      startTheGame();
+      
+    }
+    if(hasPressedLongEnough(2, 1))
+    {
+      Serial.print("highscore");
+      clearDisplay();
+      delay(100);
+      showResult(highScore);
+      delay(3000);
+      clearDisplay();
+    }
+
+    if(hasPressedLongEnough(1,1)){
+      show1();
+    }
   }
 
   if(isPlaying)
@@ -84,13 +105,13 @@ void checkGame(int buttonNum)
     currentRound++;
     pressedCount++;
 
-    int randomNumber = gameNumbers[pressedCount];
+    
 
     //check if button has been pressed 10 times
-    if (pressedCount >= 9) 
+    if (pressedCount > 9) 
     {
       initializeGame();
-      maxTime = maxTime * 0.9;
+      maxTime = maxTime * 0.7;
     }
 
     Serial.println("");
@@ -99,6 +120,7 @@ void checkGame(int buttonNum)
     
     currentTime = 0;
 
+    int randomNumber = gameNumbers[pressedCount];
     clearAllLeds();
     delay(100);
     setLed(randomNumber);
@@ -115,12 +137,14 @@ void checkGame(int buttonNum)
     gameLost = true;
   }
 
+  if(currentRound > highScore){
+    highScore = currentRound;
+  }
+
   showResult(currentRound);
   Serial.println("");
   Serial.print("currentRound = ");
   Serial.println(currentRound);
-
-  //return rightNumber;
 }
 
 
@@ -139,9 +163,11 @@ void initializeGame()
 
 void startTheGame()
 {
+  clearDisplay();
   setAllLeds();
+  playStartAudio();  //ÄLÄ POISTA
   delay(1000);
-  show1();
+  //show1();  //ÄLÄ POISTA
   maxTime = maxMaxTime;
   currentRound = 0;
   pressedCount = 0;
@@ -150,14 +176,21 @@ void startTheGame()
   int randomNumber = gameNumbers[pressedCount];
   setLed(randomNumber);
   currentTime = 0;
+
+  isPlaying = true;
+  gameLost = false;
 }
 
 
 void loseTheGame()
 {
+  playLoseAudio();
   isPlaying = false;
+  
   setAllLeds();
   delay(1000);
   show2(12);
+  delay(1000);
+  clearDisplay();
 }
 
