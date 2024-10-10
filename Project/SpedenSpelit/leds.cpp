@@ -113,7 +113,8 @@ void show2(int rounds)
       delay(baseDelay);  // Wait before turning on the next LED
     }
     clearAllLeds(); // Turn off all LEDs before starting the next round
-
+    delay(150);  // Small delay so that clearing all leds can be seen
+    
     // Speed up the show by decreasing the delay after each round
     baseDelay -= decrement;
     if (baseDelay < minDelay)
