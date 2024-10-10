@@ -49,7 +49,7 @@ void setAllLeds()
   }  
 }
 
-// void setLed(byte), void clearAllLeds(void) ja void setAllLeds(void) aliohjelmien toiminnan testausta varten
+//  For testing the operation of subroutines void setLed(byte), void clearAllLeds(void) and void setAllLeds(void)
 void testiOhjelma()
 {
   setAllLeds();        // Turn on all leds
@@ -87,6 +87,7 @@ void show1()
   digitalWrite(A5, HIGH), delay(200);
   digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
   digitalWrite(A5, HIGH), delay(200);
+  clearAllLeds();
 }
 
 /* 
