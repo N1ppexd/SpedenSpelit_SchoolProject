@@ -41,7 +41,6 @@ void loop()
     if (hasPressedLongEnough(3, 1))
     {
       startTheGame();
-      
     }
     if(hasPressedLongEnough(2, 1))
     {
@@ -80,7 +79,6 @@ void initializeTimer(void)
   OCR1A = timerLimit; // ten times a second.
   TIMSK1 |= (1 << OCIE1A); 
   interrupts(); // Re-enable
-	// see requirements for the function from SpedenSpelit.h
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -95,7 +93,6 @@ ISR(TIMER1_COMPA_vect)
   }
 }
 
-
 void checkGame(int buttonNum)
 {
   // checks if the right button was pressed.
@@ -104,8 +101,6 @@ void checkGame(int buttonNum)
     playerButtonPushes[pressedCount] = gameNumbers[pressedCount];
     currentRound++;
     pressedCount++;
-
-    
 
     //check if button has been pressed 10 times
     if (pressedCount > 9) 
@@ -126,21 +121,22 @@ void checkGame(int buttonNum)
     setLed(randomNumber);
 
   } 
+  
   //if player DID press a button (meaning buttonNum is more or equal to 0), but it was the wrong one, game is lost
   else if (buttonNum >= 0) 
   {
     gameLost = true;
   }
+  
   //if button was not pressed, and time has passed, player loses...
   if(buttonNum == -1 && timeHasPassed)
   {
     gameLost = true;
   }
-
+  
   if(currentRound > highScore){
     highScore = currentRound;
-  }
-
+  } 
   showResult(currentRound);
   Serial.println("");
   Serial.print("currentRound = ");
@@ -151,10 +147,11 @@ void checkGame(int buttonNum)
 void initializeGame()
 {
   pressedCount = 0;
+  // create array for random 10 game numbers.
   for (int i = 0; i < 10; i++) {
     gameNumbers[i] = random(0,4);
   }
-
+  // clear button pushes by setting all of them to 0.
   for (int i = 0; i < 10; i++) {
     playerButtonPushes[i] = 0;
   }
@@ -165,9 +162,8 @@ void startTheGame()
 {
   clearDisplay();
   setAllLeds();
-  playStartAudio();  //ÄLÄ POISTA
+  playStartAudio();
   delay(1000);
-  //show1();  //ÄLÄ POISTA
   maxTime = maxMaxTime;
   currentRound = 0;
   pressedCount = 0;
@@ -176,7 +172,6 @@ void startTheGame()
   int randomNumber = gameNumbers[pressedCount];
   setLed(randomNumber);
   currentTime = 0;
-
   isPlaying = true;
   gameLost = false;
 }
