@@ -2,12 +2,19 @@
 
 
 
-This is a school project called Spedenspelit. It's a game made with arduino. In the game you press buttons. 
-![image](https://github.com/user-attachments/assets/bf91d76a-7adf-4260-a50f-bacc7a7d62e5)
-![image](https://github.com/user-attachments/assets/f47cd290-4148-47b8-bc96-e641d845ee7c)
+This is a school project called Spedenspelit made by a group of four people. It's a physical game made with Arduino R3 and programmed in Arduino IDE. 
+The idea is to press the correct button according to the LED that lights up before the timer runs out.
+The work was split about evenly between team members, and each had its own sector to plan and code.
+
+Each group was provided with a base document that offered some help regarding coding and building circuits, but it was optional whether the team used it or not.
+In addition, each team could add their features to the game to make it more unique from the base document. Our team added sound effects when starting the game, pressing buttons, and in the game over. 
+We also added a high score that can be seen when a specific button is pressed.
+
+The final circuit was built on the university campus.
 
 
-Here's the thing
+The circuit made with Tinkercad.com:
 
-![image](https://github.com/user-attachments/assets/e8b09d7a-f53b-4a0d-bc4b-d6ba71b7720a)
+
+![curcuit](https://github.com/user-attachments/assets/3eede35d-79dc-4c21-b855-ff025674d01b)
 
