@@ -49,7 +49,7 @@ void setAllLeds()
   }  
 }
 
-// void setLed(byte), void clearAllLeds(void) ja void setAllLeds(void) aliohjelmien toiminnan testausta varten
+//  For testing the operation of subroutines void setLed(byte), void clearAllLeds(void) and void setAllLeds(void)
 void testiOhjelma()
 {
   setAllLeds();        // Turn on all leds
@@ -71,22 +71,23 @@ void testiOhjelma()
 // show1() subroutine shows numbers 0,1,...,15 as binary numbers, waits a bit and repeats number "show"
 void show1()
 {
-  clearAllLeds(), delay(1000); 
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A2, HIGH), digitalWrite(A3, LOW), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
-  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(1000);
-  digitalWrite(A5, HIGH), delay(1000);
+  clearAllLeds(), delay(200); 
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A2, HIGH), digitalWrite(A3, LOW), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A3, HIGH), digitalWrite(A4, LOW), digitalWrite(A5, LOW), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  digitalWrite(A5, LOW), digitalWrite(A4, HIGH), delay(200);
+  digitalWrite(A5, HIGH), delay(200);
+  clearAllLeds();
 }
 
 /* 
@@ -112,7 +113,8 @@ void show2(int rounds)
       delay(baseDelay);  // Wait before turning on the next LED
     }
     clearAllLeds(); // Turn off all LEDs before starting the next round
-
+    delay(150);  // Small delay so that clearing all leds can be seen
+    
     // Speed up the show by decreasing the delay after each round
     baseDelay -= decrement;
     if (baseDelay < minDelay)
