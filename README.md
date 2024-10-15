@@ -18,3 +18,4 @@ The circuit made with Tinkercad.com:
 
 ![curcuit](https://github.com/user-attachments/assets/3eede35d-79dc-4c21-b855-ff025674d01b)
 
+![Näyttökuva 2024-10-15 203305](https://github.com/user-attachments/assets/f14072c6-25ef-458c-9d25-670e7a459c68)
