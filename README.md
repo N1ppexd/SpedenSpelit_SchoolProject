@@ -15,5 +15,6 @@ The final circuit was built on the university campus.
 
 The circuit made with Tinkercad.com:
 
-![image](https://github.com/user-attachments/assets/e8b09d7a-f53b-4a0d-bc4b-d6ba71b7720a)
+
+![curcuit](https://github.com/user-attachments/assets/3eede35d-79dc-4c21-b855-ff025674d01b)
 
