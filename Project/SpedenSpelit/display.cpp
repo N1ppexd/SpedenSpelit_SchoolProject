@@ -22,8 +22,8 @@ const byte bitNumbers[10] =
 };
 
 
-const byte displayPointByte = 1;
-const byte clearDisplayByte = 0;
+const byte displayPointByte = 1; //can be used to add the display point with an OR operation
+const byte clearDisplayByte = 0; //this byte when sent to the display clears everything.
 
 
 void initializeDisplay(void)
@@ -62,7 +62,6 @@ void writeByte(uint8_t bits,bool last)
 
         //set either 1 or 0 based on the rightmost bit on the bits...
         uint8_t shiftedBits = bits;
-        //digitalWrite(dataPin, ((shiftedBits << i) & 0b10000000) >> 7);///
         digitalWrite(dataPin, (shiftedBits >> i) & 1);
 
         digitalWrite(clockPin, HIGH);
@@ -76,8 +75,6 @@ void writeByte(uint8_t bits,bool last)
 
 void writeHighAndLowNumber(int numbers[])
 {
-    //writeByte(ones, true);
-
     for(int i = amountOfDisplays - 1; i >= 0; i--){
 
         bool isLast = false;
