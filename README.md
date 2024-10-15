@@ -2,7 +2,7 @@
 
 
 
-This is a school project called Spedenspelit made by a group of four people. It's a physical game made with Arduino R3 and programmed in Arduino IDE. 
+This is a school project called Spedenspelit, made by four people: N1ppexd, Warfora, Muussinuijat, and MrM1ksu. It's a physical game made with Arduino R3 and programmed in Arduino IDE. 
 The idea is to press the correct button according to the LED that lights up before the timer runs out.
 The work was split about evenly between team members, and each had its own sector to plan and code.
 
