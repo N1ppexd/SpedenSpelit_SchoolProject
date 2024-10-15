@@ -20,3 +20,4 @@ The circuit made with Tinkercad.com:
 ![curcuit](https://github.com/user-attachments/assets/3eede35d-79dc-4c21-b855-ff025674d01b)
 
 
+[Spedenspelit.pdf](https://github.com/user-attachments/files/17382780/Spedenspelit.pdf)
