@@ -6,8 +6,6 @@ void playButtonPressAudio(void)
 }
 
 void playStartAudio(void){
-  Serial.print("playStartAudio");
-
   // short start sound
   int startTones[] = {523, 587, 659}; // C4, D4, E4
   for (int i = 0; i < 3; i++) {
@@ -18,8 +16,6 @@ void playStartAudio(void){
 }
 
 void playLoseAudio(void){
-  Serial.print("playLoseAudio");
-
   // short game over sound
   int gameOverTones[] = {659, 587, 523}; // E4, D4, C4
   for (int i = 0; i < 3; i++) {
