@@ -2,7 +2,7 @@
 
 void playButtonPressAudio(void)
 {
-  playAudio(NOTE_C5, 100); 
+  tone(buzzerPin, NOTE_C5, 100);
 }
 
 void playStartAudio(void){
@@ -23,8 +23,4 @@ void playLoseAudio(void){
     delay(100); // 100 ms break between notes
   }
   noTone(buzzerPin);
-}
-
-void playAudio(int frequency, int timeInMilliseconds){
-    tone(buzzerPin, frequency, timeInMilliseconds);
 }
